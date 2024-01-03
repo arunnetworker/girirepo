@@ -1,0 +1,20 @@
+--- 
+- hosts: all 
+  remote_user: ec2-user
+  become: yes
+  tasks: 
+    - name: update linux 
+      yum:
+        name: '*'
+        state: latest 
+    - name: install java
+      yum:
+        name: java
+        state: present 
+    - name: install tomcat server 
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.95/bin/apache-tomcat-8.5.95.tar.gz 
+        dest: /opt/ 
+        mode: 777
+    - name: insttal unarchive
+      yum:
